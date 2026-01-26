@@ -1,0 +1,139 @@
+/* ===== Botones de ejercicios ===== */
+.exercise-btn {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.exercise-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.exercise-btn.active {
+    background-color: #4f46e5;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+}
+
+/* ===== Clases para contenido dinamico del panel ===== */
+.val {
+    font-family: 'Courier New', monospace;
+    background-color: #eef2ff;
+    color: #4338ca;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.ok {
+    color: #059669;
+    font-weight: 700;
+    margin-left: 4px;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* ===== Encabezados de seccion dentro del panel ===== */
+.info-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4338ca;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e0e7ff;
+}
+
+.info-section {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9ca3af;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.info-section:first-of-type {
+    margin-top: 0;
+}
+
+.info-row {
+    margin-left: 16px;
+    margin-bottom: 2px;
+    line-height: 1.8;
+}
+
+.info-note {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    line-height: 1.6;
+}
+
+/* ===== Secciones desplegables de procedimiento ===== */
+.proof {
+    margin: 4px 0 8px 16px;
+}
+
+.proof summary {
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: #6366f1;
+    font-weight: 500;
+    padding: 2px 0;
+    user-select: none;
+    list-style: none;
+}
+
+.proof summary::-webkit-details-marker {
+    display: none;
+}
+
+.proof summary::before {
+    content: '\25B6';
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 0.6rem;
+    transition: transform 0.2s;
+}
+
+.proof[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.proof summary:hover {
+    color: #4338ca;
+}
+
+.proof .steps {
+    margin-top: 6px;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: #374151;
+    overflow-x: auto;
+}

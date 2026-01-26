@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Vectores en R2 y R3</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <style>
+        @page {
+            size: letter;
+            margin: 2cm 2.5cm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            max-width: 18cm;
+            margin: 0 auto;
+            padding: 2cm 2.5cm;
+            background: white;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ===== Encabezado ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 1.8em;
+            padding-bottom: 1.2em;
+            border-bottom: 2px solid #333;
+        }
+
+        .header h1 {
+            font-size: 15pt;
+            margin-bottom: 0.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header h2 {
+            font-size: 12pt;
+            font-weight: normal;
+            margin-bottom: 0.8em;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11pt;
+            margin-top: 0.8em;
+        }
+
+        .fill-line {
+            border-bottom: 1px solid #999;
+            min-width: 180px;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        /* ===== Ejercicios ===== */
+        .exercise {
+            margin-bottom: 2em;
+        }
+
+        .exercise-title {
+            font-size: 12.5pt;
+            font-weight: bold;
+            margin-bottom: 0.6em;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #ccc;
+            color: #222;
+            break-after: avoid;
+        }
+
+        .problem {
+            margin-bottom: 0.8em;
+            padding: 0.6em 1em;
+            background: #f5f5f5;
+            border-left: 3px solid #555;
+            font-style: italic;
+            break-after: avoid;
+        }
+
+        .solution-label {
+            font-weight: bold;
+            font-size: 11pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #444;
+            margin: 0.8em 0 0.4em 0;
+            break-after: avoid;
+        }
+
+        .sub-label {
+            font-weight: bold;
+            margin: 0.8em 0 0.3em 0;
+            color: #333;
+            break-after: avoid;
+        }
+
+        .step {
+            margin: 0.2em 0 0.2em 1.5em;
+            line-height: 1.8;
+            break-inside: avoid;
+        }
+
+        .result {
+            margin: 0.6em 0;
+            padding: 0.5em 1em;
+            background: #f0f4ff;
+            border: 1px solid #d0d8f0;
+            border-radius: 3px;
+            font-weight: bold;
+            break-inside: avoid;
+        }
+
+        .explanation {
+            margin: 0.4em 0 0.4em 1.5em;
+            color: #444;
+            font-size: 11pt;
+        }
+
+        .verification {
+            margin: 0.4em 0 0.4em 1.5em;
+            padding: 0.3em 0.8em;
+            background: #f0fff0;
+            border-left: 3px solid #4a4;
+            font-size: 11pt;
+            break-inside: avoid;
+        }
+
+        /* ===== Separador entre sub-ejercicios ===== */
+        .separator {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 1.2em 0;
+        }
+
+        /* ===== Salto de pagina ===== */
+        .page-break {
+            break-before: page;
+        }
+
+        /* ===== KaTeX ajustes ===== */
+        .katex-display {
+            margin: 0.3em 0 !important;
+        }
+
+        .step .katex-display {
+            margin: 0.1em 0 !important;
+        }
+
+        .katex {
+            font-size: 1.05em !important;
+        }
+
+        /* ===== Impresion ===== */
+        @media print {
+            body {
+                padding: 0;
+                max-width: none;
+            }
+
+            .result,
+            .verification {
+                break-inside: avoid;
+            }
+
+            .sub-label,
+            .exercise-title,
+            .solution-label {
+                break-after: avoid;
+            }
+
+            .problem {
+                background: #f5f5f5 !important;
+            }
+
+            .result {
+                background: #f0f4ff !important;
+                border: 1px solid #d0d8f0 !important;
+            }
+
+            .verification {
+                background: #f0fff0 !important;
+                border-left: 3px solid #4a4 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== ENCABEZADO ===== -->
+    <div class="header">
+        <h1>Ejercicios de Vectores en R&sup2; y R&sup3;</h1>
+        <h2>Taller 2 &mdash; Operaciones con Vectores</h2>
+        <table style="width:100%; margin-top:0.8em; font-size:11pt; border-collapse:collapse;">
+            <tr>
+                <td style="text-align:left; padding:4px 0;">Nombre: <span class="fill-line">&nbsp;</span></td>
+                <td style="text-align:right; padding:4px 0;">Materia: <span class="fill-line">&nbsp;</span></td>
+            </tr>
+            <tr>
+                <td style="text-align:left; padding:4px 0;">Docente: <span class="fill-line">&nbsp;</span></td>
+                <td style="text-align:right; padding:4px 0;">Fecha: <span class="fill-line">&nbsp;</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ===== EJERCICIO A ===== -->
+    <div class="exercise">
+        <div class="exercise-title">Ejercicio 2a &mdash; Componentes y m&oacute;dulo de un vector</div>
+
+        <div class="problem">
+            Determine las componentes y el m&oacute;dulo de:<br>
+            &bull; Un vector en el plano cuyo origen es el punto $(1,2)$ y su extremo el punto $(-3,3)$.<br>
+            &bull; Un vector en $\mathbb{R}^3$ cuyo origen es el punto $(0,-1,2)$ y su extremo es el punto $(-3,1,3)$.
+        </div>
+
+        <p class="solution-label">Soluci&oacute;n</p>
+
+        <!-- Vector v1 -->
+        <p class="sub-label">Vector $\vec{v}_1$ en $\mathbb{R}^2$:</p>
+
+        <p class="explanation">
+            Para obtener las componentes de un vector a partir de dos puntos, se restan las coordenadas
+            del extremo menos las del origen: $\vec{v} = B - A$.
+        </p>
+
+        <div class="step">
+            $$\vec{v}_1 = (-3, 3) - (1, 2)$$
+        </div>
+        <div class="step">
+            $$\vec{v}_1 = (-3-1,\; 3-2)$$
+        </div>
+        <div class="step">
+            $$\vec{v}_1 = (-4,\; 1)$$
+        </div>
+
+        <p class="explanation">
+            El m&oacute;dulo (o norma) de un vector en $\mathbb{R}^2$ se calcula con la f&oacute;rmula
+            $\|\vec{v}\| = \sqrt{x^2 + y^2}$:
+        </p>
+
+        <div class="step">
+            $$\|\vec{v}_1\| = \sqrt{(-4)^2 + 1^2} = \sqrt{16 + 1} = \sqrt{17}$$
+        </div>
+
+        <div class="result">
+            Componentes: $\vec{v}_1 = (-4,\; 1)$ &nbsp;&nbsp;|&nbsp;&nbsp; M&oacute;dulo: $\|\vec{v}_1\| = \sqrt{17} \approx 4{,}1231$
+        </div>
+
+        <hr class="separator">
+
+        <!-- Vector v2 -->
+        <p class="sub-label">Vector $\vec{v}_2$ en $\mathbb{R}^3$:</p>
+
+        <p class="explanation">
+            Se aplica el mismo procedimiento para tres dimensiones: $\vec{v} = B - A$.
+        </p>
+
+        <div class="step">
+            $$\vec{v}_2 = (-3, 1, 3) - (0, -1, 2)$$
+        </div>
+        <div class="step">
+            $$\vec{v}_2 = (-3-0,\; 1-(-1),\; 3-2)$$
+        </div>
+        <div class="step">
+            $$\vec{v}_2 = (-3,\; 2,\; 1)$$
+        </div>
+
+        <p class="explanation">
+            La norma en $\mathbb{R}^3$ se calcula con $\|\vec{v}\| = \sqrt{x^2 + y^2 + z^2}$:
+        </p>
+
+        <div class="step">
+            $$\|\vec{v}_2\| = \sqrt{(-3)^2 + 2^2 + 1^2} = \sqrt{9 + 4 + 1} = \sqrt{14}$$
+        </div>
+
+        <div class="result">
+            Componentes: $\vec{v}_2 = (-3,\; 2,\; 1)$ &nbsp;&nbsp;|&nbsp;&nbsp; M&oacute;dulo: $\|\vec{v}_2\| = \sqrt{14} \approx 3{,}7417$
+        </div>
+    </div>
+
+    <!-- ===== EJERCICIO B ===== -->
+    <div class="exercise page-break">
+        <div class="exercise-title">Ejercicio 2b &mdash; Valor de $x$ para vectores perpendiculares</div>
+
+        <div class="problem">
+            Encuentre el valor de $x$ para que los vectores sean perpendiculares:<br>
+            &bull; $A = (2, 3)$ y $B = (-1, x)$<br>
+            &bull; $C = (5, 3, 1)$ y $D = (2, x, 4)$
+        </div>
+
+        <p class="solution-label">Soluci&oacute;n</p>
+
+        <p class="explanation">
+            Dos vectores son perpendiculares (ortogonales) si y solo si su producto punto es igual a cero:
+            $\vec{u} \perp \vec{v} \iff \vec{u} \cdot \vec{v} = 0$.
+        </p>
+
+        <!-- Par 1 -->
+        <p class="sub-label">Par 1: $A = (2, 3)$ y $B = (-1, x)$</p>
+
+        <div class="step">
+            $$A \cdot B = (2)(-1) + (3)(x) = 0$$
+        </div>
+        <div class="step">
+            $$-2 + 3x = 0$$
+        </div>
+        <div class="step">
+            $$3x = 2$$
+        </div>
+        <div class="step">
+            $$x = \frac{2}{3}$$
+        </div>
+
+        <div class="verification">
+            <strong>Verificaci&oacute;n:</strong>
+            $A \cdot B = (2)(-1) + (3)\!\left(\frac{2}{3}\right) = -2 + 2 = 0$ &nbsp; &#10003;
+        </div>
+
+        <div class="result">
+            $x = \dfrac{2}{3}$
+        </div>
+
+        <hr class="separator">
+
+        <!-- Par 2 -->
+        <p class="sub-label">Par 2: $C = (5, 3, 1)$ y $D = (2, x, 4)$</p>
+
+        <div class="step">
+            $$C \cdot D = (5)(2) + (3)(x) + (1)(4) = 0$$
+        </div>
+        <div class="step">
+            $$10 + 3x + 4 = 0$$
+        </div>
+        <div class="step">
+            $$14 + 3x = 0$$
+        </div>
+        <div class="step">
+            $$3x = -14$$
+        </div>
+        <div class="step">
+            $$x = -\frac{14}{3}$$
+        </div>
+
+        <div class="verification">
+            <strong>Verificaci&oacute;n:</strong>
+            $C \cdot D = (5)(2) + (3)\!\left(-\frac{14}{3}\right) + (1)(4) = 10 - 14 + 4 = 0$ &nbsp; &#10003;
+        </div>
+
+        <div class="result">
+            $x = -\dfrac{14}{3}$
+        </div>
+    </div>
+
+    <!-- ===== EJERCICIO C ===== -->
+    <div class="exercise page-break">
+        <div class="exercise-title">Ejercicio 2c &mdash; Operaciones con vectores $\vec{u}$ y $\vec{v}$</div>
+
+        <div class="problem">
+            Dados los vectores $\vec{u} = -\hat{\imath} + 2\hat{\jmath} + 3\hat{k}$ y
+            $\vec{v} = 3\hat{\imath} + \hat{\jmath} - 2\hat{k}$, encuentre: la norma de cada vector,
+            el producto punto $\vec{u} \cdot \vec{v}$ y $\vec{v} \cdot \vec{u}$,
+            el producto vectorial $\vec{u} \times \vec{v}$ y $\vec{v} \times \vec{u}$,
+            la distancia entre ellos y el &aacute;ngulo entre los vectores.
+        </div>
+
+        <p class="solution-label">Soluci&oacute;n</p>
+
+        <p class="explanation">
+            Los vectores en forma de componentes son: $\vec{u} = (-1, 2, 3)$ y $\vec{v} = (3, 1, -2)$.
+        </p>
+
+        <!-- Normas -->
+        <p class="sub-label">1. Norma de cada vector</p>
+
+        <p class="explanation">
+            La norma de un vector en $\mathbb{R}^3$ se define como
+            $\|\vec{w}\| = \sqrt{w_1^2 + w_2^2 + w_3^2}$.
+        </p>
+
+        <div class="step">
+            $$\|\vec{u}\| = \sqrt{(-1)^2 + 2^2 + 3^2} = \sqrt{1 + 4 + 9} = \sqrt{14}$$
+        </div>
+        <div class="step">
+            $$\|\vec{v}\| = \sqrt{3^2 + 1^2 + (-2)^2} = \sqrt{9 + 1 + 4} = \sqrt{14}$$
+        </div>
+
+        <div class="result">
+            $\|\vec{u}\| = \sqrt{14} \approx 3{,}7417$ &nbsp;&nbsp;|&nbsp;&nbsp;
+            $\|\vec{v}\| = \sqrt{14} \approx 3{,}7417$
+        </div>
+
+        <hr class="separator">
+
+        <!-- Producto punto -->
+        <p class="sub-label">2. Producto punto</p>
+
+        <p class="explanation">
+            El producto punto (o producto escalar) se define como
+            $\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 + u_3 v_3$. Es una operaci&oacute;n conmutativa,
+            es decir, $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$.
+        </p>
+
+        <div class="step">
+            $$\vec{u} \cdot \vec{v} = (-1)(3) + (2)(1) + (3)(-2) = -3 + 2 - 6 = -7$$
+        </div>
+        <div class="step">
+            $$\vec{v} \cdot \vec{u} = (3)(-1) + (1)(2) + (-2)(3) = -3 + 2 - 6 = -7$$
+        </div>
+
+        <div class="result">
+            $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u} = -7$
+        </div>
+
+        <p class="explanation">
+            Se confirma la propiedad conmutativa del producto punto.
+        </p>
+
+        <hr class="separator">
+
+        <!-- Producto vectorial -->
+        <div class="page-break"></div>
+        <p class="sub-label">3. Producto vectorial</p>
+
+        <p class="explanation">
+            El producto vectorial se calcula mediante el determinante de una matriz $3 \times 3$ formada
+            por los vectores unitarios y las componentes de ambos vectores. A diferencia del producto
+            punto, el producto vectorial es <strong>anticonmutativo</strong>:
+            $\vec{v} \times \vec{u} = -(\vec{u} \times \vec{v})$.
+        </p>
+
+        <div class="step">
+            $$\vec{u} \times \vec{v} =
+            \begin{vmatrix}
+            \hat{\imath} & \hat{\jmath} & \hat{k} \\
+            -1 & 2 & 3 \\
+            3 & 1 & -2
+            \end{vmatrix}$$
+        </div>
+
+        <p class="explanation">Expandiendo por cofactores a lo largo de la primera fila:</p>
+
+        <div class="step">
+            $$\hat{\imath}\big[(2)(-2) - (3)(1)\big] - \hat{\jmath}\big[(-1)(-2) - (3)(3)\big] + \hat{k}\big[(-1)(1) - (2)(3)\big]$$
+        </div>
+        <div class="step">
+            $$= \hat{\imath}(-4 - 3) - \hat{\jmath}(2 - 9) + \hat{k}(-1 - 6)$$
+        </div>
+        <div class="step">
+            $$= -7\hat{\imath} + 7\hat{\jmath} - 7\hat{k}$$
+        </div>
+
+        <div class="result">
+            $\vec{u} \times \vec{v} = (-7,\; 7,\; -7)$
+        </div>
+
+        <p class="explanation">
+            Por la propiedad anticonmutativa:
+        </p>
+
+        <div class="step">
+            $$\vec{v} \times \vec{u} = -(\vec{u} \times \vec{v}) = -(-7, 7, -7) = (7, -7, 7)$$
+        </div>
+
+        <div class="result">
+            $\vec{v} \times \vec{u} = (7,\; -7,\; 7)$
+        </div>
+
+        <hr class="separator">
+
+        <!-- Distancia -->
+        <p class="sub-label">4. Distancia entre los vectores</p>
+
+        <p class="explanation">
+            La distancia entre dos vectores se calcula como la norma de su diferencia:
+            $d(\vec{u}, \vec{v}) = \|\vec{u} - \vec{v}\|$.
+        </p>
+
+        <div class="step">
+            $$\vec{u} - \vec{v} = (-1-3,\; 2-1,\; 3-(-2)) = (-4,\; 1,\; 5)$$
+        </div>
+        <div class="step">
+            $$\|\vec{u} - \vec{v}\| = \sqrt{(-4)^2 + 1^2 + 5^2} = \sqrt{16 + 1 + 25} = \sqrt{42}$$
+        </div>
+
+        <div class="result">
+            $d(\vec{u}, \vec{v}) = \sqrt{42} \approx 6{,}4807$
+        </div>
+
+        <hr class="separator">
+
+        <!-- Angulo -->
+        <p class="sub-label">5. &Aacute;ngulo entre los vectores</p>
+
+        <p class="explanation">
+            El &aacute;ngulo $\theta$ entre dos vectores se obtiene a partir de la relaci&oacute;n entre el producto
+            punto y las normas: $\cos\theta = \dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \cdot \|\vec{v}\|}$.
+        </p>
+
+        <div class="step">
+            $$\cos\theta = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \cdot \|\vec{v}\|} = \frac{-7}{\sqrt{14} \cdot \sqrt{14}} = \frac{-7}{14} = -\frac{1}{2}$$
+        </div>
+        <div class="step">
+            $$\theta = \arccos\!\left(-\frac{1}{2}\right) = 120°$$
+        </div>
+
+        <div class="result">
+            $\theta = 120°$
+        </div>
+
+        <p class="explanation">
+            El &aacute;ngulo es obtuso ($> 90°$), lo cual es consistente con el hecho de que el producto punto
+            es negativo ($\vec{u} \cdot \vec{v} = -7 < 0$).
+        </p>
+    </div>
+
+    <!-- ===== EJERCICIO D ===== -->
+    <div class="exercise page-break">
+        <div class="exercise-title">Ejercicio 2d &mdash; &Aacute;rea de un paralelogramo</div>
+
+        <div class="problem">
+            Calcule el &aacute;rea de un paralelogramo cuyos lados son los vectores $(3, 2, 1)$ y $(-1, 5, 7)$.
+        </div>
+
+        <p class="solution-label">Soluci&oacute;n</p>
+
+        <p class="explanation">
+            El &aacute;rea de un paralelogramo formado por dos vectores $\vec{a}$ y $\vec{b}$ es igual a la
+            magnitud de su producto vectorial: $\text{&Aacute;rea} = \|\vec{a} \times \vec{b}\|$.
+        </p>
+
+        <!-- Producto vectorial -->
+        <p class="sub-label">Paso 1: Calcular $\vec{a} \times \vec{b}$</p>
+
+        <p class="explanation">
+            Con $\vec{a} = (3, 2, 1)$ y $\vec{b} = (-1, 5, 7)$:
+        </p>
+
+        <div class="step">
+            $$\vec{a} \times \vec{b} =
+            \begin{vmatrix}
+            \hat{\imath} & \hat{\jmath} & \hat{k} \\
+            3 & 2 & 1 \\
+            -1 & 5 & 7
+            \end{vmatrix}$$
+        </div>
+
+        <p class="explanation">Expandiendo por cofactores:</p>
+
+        <div class="step">
+            $$\hat{\imath}\big[(2)(7) - (1)(5)\big] - \hat{\jmath}\big[(3)(7) - (1)(-1)\big] + \hat{k}\big[(3)(5) - (2)(-1)\big]$$
+        </div>
+        <div class="step">
+            $$= \hat{\imath}(14 - 5) - \hat{\jmath}(21 + 1) + \hat{k}(15 + 2)$$
+        </div>
+        <div class="step">
+            $$= 9\hat{\imath} - 22\hat{\jmath} + 17\hat{k}$$
+        </div>
+
+        <div class="result">
+            $\vec{a} \times \vec{b} = (9,\; -22,\; 17)$
+        </div>
+
+        <hr class="separator">
+
+        <!-- Area -->
+        <p class="sub-label">Paso 2: Calcular la magnitud</p>
+
+        <div class="step">
+            $$\|\vec{a} \times \vec{b}\| = \sqrt{9^2 + (-22)^2 + 17^2}$$
+        </div>
+        <div class="step">
+            $$= \sqrt{81 + 484 + 289}$$
+        </div>
+        <div class="step">
+            $$= \sqrt{854}$$
+        </div>
+
+        <div class="result">
+            $\text{&Aacute;rea} = \sqrt{854} \approx 29{,}2233$ unidades cuadradas
+        </div>
+    </div>
+
+    <!-- KaTeX auto-render -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script>
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false }
+            ],
+            throwOnError: false
+        });
+    </script>
+</body>
+
+</html>

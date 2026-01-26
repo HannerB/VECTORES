@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador 3D de Vectores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="overflow-hidden bg-gray-100">
+    <div class="flex flex-col md:flex-row h-screen">
+
+        <!-- Panel lateral -->
+        <aside class="w-full md:w-[380px] max-h-[40vh] md:max-h-full bg-white p-6 overflow-y-auto
+                      border-b md:border-b-0 md:border-r border-gray-200 shadow-sm flex flex-col">
+
+            <div class="mb-6">
+                <h1 class="text-lg font-bold text-gray-800">Verificaci&oacute;n Geom&eacute;trica de Vectores</h1>
+                <p class="text-gray-400 text-sm mt-1">Visualizaci&oacute;n interactiva en R&sup2; y R&sup3;</p>
+            </div>
+
+            <div class="mb-6">
+                <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Ejercicios</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="showExercise('a')" id="btn-a" class="exercise-btn">A: M&oacute;dulos</button>
+                    <button onclick="showExercise('b')" id="btn-b" class="exercise-btn">B: Perpendiculares</button>
+                    <button onclick="showExercise('c')" id="btn-c" class="exercise-btn">C: Productos</button>
+                    <button onclick="showExercise('d')" id="btn-d" class="exercise-btn">D: &Aacute;rea</button>
+                </div>
+            </div>
+
+            <div id="info"
+                 class="flex-1 bg-gray-50 rounded-xl p-5 border border-gray-200 text-sm text-gray-700 leading-relaxed">
+            </div>
+        </aside>
+
+        <!-- Escena 3D -->
+        <div id="canvas-container" class="flex-1 relative bg-gray-100">
+            <canvas id="canvas" class="w-full h-full block"></canvas>
+
+            <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-3
+                        rounded-lg text-xs text-gray-500 shadow-md space-y-1 border border-gray-200">
+                <div>Click + arrastrar: rotar c&aacute;mara</div>
+                <div>Scroll: acercar / alejar</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
