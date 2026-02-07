@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Archivos temporales de Word
+~$*.docx
+*.tmp
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales y de respaldo
+*.bak
+*.swp
+*~
+nul
+
+# Carpetas de IDE
+.vscode/
+.idea/
+
+# Solo mantener el documento final y la plantilla de referencia
+# Ignorar versiones intermedias
+documento_vectores*.docx
+Ejercicios_Vectores*.docx
+documento.docx
