@@ -22,8 +22,11 @@ nul
 .idea/
 .claude/
 
-# Solo mantener el documento final y la plantilla de referencia
+# Solo mantener documentos finales organizados por tarea
 # Ignorar versiones intermedias
 documento_vectores*.docx
 Ejercicios_Vectores*.docx
 documento.docx
+
+# Mantener estructura de carpetas por tarea
+# tarea1_vectores/ y tarea2_matrices/ se mantienen en git
